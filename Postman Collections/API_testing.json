@@ -1,0 +1,1288 @@
+{
+	"info": {
+		"_postman_id": "7a68c6ad-d6a5-4020-af42-58240974e6cb",
+		"name": "Routes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create New Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac739c66-e49b-4964-bb61-14f450b9bdbe",
+						"exec": [
+							"// Extracting data from the response\r",
+							"var responseData = pm.response.json();\r",
+							"var extractedValue = responseData.job_route_uid\r",
+							" // Change 'key' to the actual key you want to extract\r",
+							"\r",
+							"// Setting environment variable\r",
+							"pm.environment.set(\"variableName\", extractedValue); // Change 'variableName' to the name of your environment variable\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - type, message, title, and job_route_uid\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.include.all.keys('type', 'message', 'title', 'job_route_uid');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0fdb4c7-8367-430a-aff3-ffc1b884761d",
+						"exec": [
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "cd7f92a3-0220-4a9a-9bfd-8d39f45dd10b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"route_name\": \"Akash1\",\r\n    \"departure\": \"2024-03-13 09:16:15\",\r\n    \"route_type\": \"FASTEST\",\r\n    \"transport_mode\": \"CAR\",\r\n    \"duration\": 1,\r\n    \"color\": \"#3498DB\",\r\n    \"start_location\": {\r\n        \"name\": \"Chennai\",\r\n        \"street\": \"Chennai Central Railway Station, Kannappar Thidal, Periyamet\",\r\n        \"geo_cords\": [\r\n            13.0827989,\r\n            80.2754246\r\n        ]\r\n    },\r\n    \"end_location\": {\r\n        \"name\": \"Puducherry\",\r\n        \"street\": \"Pondicherry\",\r\n        \"geo_cords\": [\r\n            11.9415915,\r\n            79.8083133\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4587ffb-53b6-4685-bd59-8d5519a401c7",
+						"exec": [
+							"\r",
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response has the required fields - type, message, title, and job_route_uid\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.include.all.keys('type', 'message', 'title', 'job_route_uid');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9284ffed-4a15-429d-9328-f6b9c888da62",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b3ce444b-a142-4c3d-8068-f1be4827fc20",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"route_name\": \"Akash1\",\r\n    \"departure\": \"2024-03-13 09:16:00\",\r\n    \"route_type\": \"FASTEST\",\r\n    \"transport_mode\": \"TRUCK\",\r\n    \"duration\": 1,\r\n    \"color\": \"#3498DB\",\r\n    \"start_location\": {\r\n        \"name\": \"Chennai\",\r\n        \"street\": \"Chennai Central Railway Station, Kannappar Thidal, Periyamet\",\r\n        \"geo_cords\": [\r\n            13.0827989,\r\n            80.2754246\r\n        ]\r\n    },\r\n    \"end_location\": {\r\n        \"name\": \"Kalpakkam\",\r\n        \"street\": \"Kalpakkam, Tamil Nadu, India\",\r\n        \"geo_cords\": [\r\n            12.5238119,\r\n            80.15681339999999\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Assign User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e69d84de-2a8a-460a-9cd7-e0e9d575150e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "8dc82bdb-7c0f-4248-92fa-1b4369215bef",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"users\": [\r\n        {\r\n            \"team_uid\": \"a6e6492e-1fe6-44b1-9e13-21f405bfa818\",\r\n            \"user_uid\": \"2ba442c1-8add-407b-a7e1-42ed766619e1\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/assign"
+			},
+			"response": []
+		},
+		{
+			"name": "Unassign User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c52b4969-2d76-403d-8c72-c251fb1a9f24",
+						"exec": [
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "2742f3db-be6b-40c6-916c-28e8d2ac0ceb",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"users\": [\r\n        {\r\n            \"team_uid\": \"a6e6492e-1fe6-44b1-9e13-21f405bfa818\",\r\n            \"user_uid\": \"2ba442c1-8add-407b-a7e1-42ed766619e1\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/unassign"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Job to Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f403e89-e3a4-4f3d-800f-b1632b705f7f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "63b5567d-956e-4002-929d-cdb4d68196f8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobs\": [\r\n        {\r\n            \"job_uid\": \"51848b00-c0f7-11ee-8217-9bf65cb17269\",\r\n            \"geo_cords\": [\r\n                12.9731892,\r\n                80.2505091\r\n            ]\r\n        },\r\n        {\r\n            \"job_uid\": \"43917a10-cbe9-11ee-b2f0-abfa9fa91191\",\r\n            \"geo_cords\": [\r\n                12.9009877,\r\n                80.2279301\r\n            ]\r\n        },\r\n        {\r\n            \"job_uid\": \"30bfe030-b9be-11ee-bd57-0dd147025ec6\",\r\n            \"geo_cords\": [\r\n                12.9009877,\r\n                80.2279301\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/job"
+			},
+			"response": []
+		},
+		{
+			"name": "Reorder Job in Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4fc27bc4-c204-4478-bd82-fa4b18bec7e0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "47528c11-9b1d-471d-9d67-d8152d372d38",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobs\": [\r\n        {\r\n            \"job_uid\": \"43917a10-cbe9-11ee-b2f0-abfa9fa91191\"\r\n        },\r\n        {\r\n            \"job_uid\": \"51848b00-c0f7-11ee-8217-9bf65cb17269\"\r\n        },\r\n        {\r\n            \"job_uid\": \"30bfe030-b9be-11ee-bd57-0dd147025ec6\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/reorder"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Job from Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c12fadd4-272f-4eee-ad69-ed2d28495bd1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "dc9cee1b-ee0d-4468-94b6-0d38f61b203b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobs\": [\r\n        {\r\n            \"job_uid\": \"51848b00-c0f7-11ee-8217-9bf65cb17269\"\r\n        }\r\n    ],\r\n    \"unassign_users\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/job"
+			},
+			"response": []
+		},
+		{
+			"name": "Reassign job from Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb741b03-37bd-4d05-8673-b295db721517",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "6ef6ec48-dab2-46ef-be47-7f3c80689483",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assign_route_users\": true,\r\n    \"job_uid\": \"43917a10-cbe9-11ee-b2f0-abfa9fa91191\",\r\n    \"route_uid\": \"48ca9ad0-e11e-11ee-8b3c-33ca04369cd3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/reassign"
+			},
+			"response": []
+		},
+		{
+			"name": "Clone Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8c7261a9-e821-4659-8dbc-d5807df1c73f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has the required fields - type, message, title, and job_route_uid\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.include.all.keys('type', 'message', 'title', 'job_route_uid');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "b7e6141e-2b7e-4b59-9df6-fe06ddddf7a5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"route_name\": \"Akash1\",\r\n    \"departure\": \"2024-03-13 09:16:00\",\r\n    \"route_type\": \"FASTEST\",\r\n    \"transport_mode\": \"TRUCK\",\r\n    \"duration\": 1,\r\n    \"color\": \"#3498DB\",\r\n    \"start_location\": {\r\n        \"name\": \"Chennai\",\r\n        \"street\": \"Chennai Central Railway Station, Kannappar Thidal, Periyamet\",\r\n        \"geo_cords\": [\r\n            13.0827989,\r\n            80.2754246\r\n        ]\r\n    },\r\n    \"end_location\": {\r\n        \"name\": \"BSR Mall\",\r\n        \"street\": \"Kalpakkam, Tamil Nadu, India\",\r\n        \"geo_cords\": [\r\n            12.5238119,\r\n            80.15681339999999\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/clone"
+			},
+			"response": []
+		},
+		{
+			"name": "Optimize Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f96efba-7a9c-4903-bdd8-3602ee42f0fb",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "670ee2c2-79a4-4c86-8b91-70ff010444b0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}/optimize"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Routes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c0245c6-60e0-47bb-ae45-a681d8778df1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "00de08ef-2620-482f-9482-f6f5e823b6a9",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Get a Route Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4488e793-4961-4cc7-b45a-8b1f77fe08c8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "507ecc5d-a3be-412c-80cd-8df15466bd40",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://staging.zuperpro.com/api/routes?limit=20&page=1&from_date=2024-03-13&to_date=2024-03-13&filter.keyword=new",
+					"protocol": "https",
+					"host": [
+						"staging",
+						"zuperpro",
+						"com"
+					],
+					"path": [
+						"api",
+						"routes"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "from_date",
+							"value": "2024-03-13"
+						},
+						{
+							"key": "to_date",
+							"value": "2024-03-13"
+						},
+						{
+							"key": "filter.keyword",
+							"value": "new"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Route Count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bbed5ac8-048f-402b-aedb-a742fbc0aae6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "6e77adc5-fa52-41cf-a982-b3b92cdecf9a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://staging.zuperpro.com/api/routes/count?from_date=2024-03-01&to_date=2024-03-31",
+					"protocol": "https",
+					"host": [
+						"staging",
+						"zuperpro",
+						"com"
+					],
+					"path": [
+						"api",
+						"routes",
+						"count"
+					],
+					"query": [
+						{
+							"key": "from_date",
+							"value": "2024-03-01"
+						},
+						{
+							"key": "to_date",
+							"value": "2024-03-31"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Route Config",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "201678e7-9c46-4e78-958f-16357ec00a7a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has the required fields - type, message, title, and job_route_uid\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData).to.include.all.keys('type', 'message', 'title', 'job_route_uid');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "00b259c9-d05f-429b-9ae1-1376ed296e56",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://staging.zuperpro.com/api/routes/routes/{{variableName}}/config"
+			},
+			"response": []
+		},
+		{
+			"name": "Route Lock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f993d758-1b0b-4ac4-a865-18a540ecefd6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "fe7eb162-b2b1-4354-81cd-ea1cecfd22e8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://staging.zuperpro.com/api/routes/{{variableName}}/lock?is_locked=true",
+					"protocol": "https",
+					"host": [
+						"staging",
+						"zuperpro",
+						"com"
+					],
+					"path": [
+						"api",
+						"routes",
+						"{{variableName}}",
+						"lock"
+					],
+					"query": [
+						{
+							"key": "is_locked",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Route",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b28fcffe-eadf-467e-9660-900bea731c91",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "c9b76af8-11c9-492f-8c4c-52fa08b5289f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Route UnLock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f06f219-88aa-4be8-bd95-915723651096",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "9fe4a798-fb4a-47b9-8b56-ffdd511944aa",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://staging.zuperpro.com/api/routes/{{variableName}}/lock?is_locked=false",
+					"protocol": "https",
+					"host": [
+						"staging",
+						"zuperpro",
+						"com"
+					],
+					"path": [
+						"api",
+						"routes",
+						"{{variableName}}",
+						"lock"
+					],
+					"query": [
+						{
+							"key": "is_locked",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Route after Unlock",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b28fcffe-eadf-467e-9660-900bea731c91",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e0d532fb-ea5a-4a66-8e03-e735c6d9f174",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Route Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b28fcffe-eadf-467e-9660-900bea731c91",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Type is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.type).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Type should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Message is a non-empty string\", function () {\r",
+							"    const responseData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(responseData).to.be.an('object');\r",
+							"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Job_route_uid is not null\", function () {\r",
+							"  const responseData = pm.response.json();\r",
+							"  \r",
+							"  pm.expect(responseData.job_route_uid).to.not.be.null;\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "7ff34793-adb5-4a2d-8c7b-c83a4e098fae",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"jobs\": [\r\n        {\r\n            \"job_uid\": \"43917a10-cbe9-11ee-b2f0-abfa9fa91191\"\r\n        }\r\n    ],\r\n    \"unassign_users\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://staging.zuperpro.com/api/routes/{{variableName}}"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": {
+			"key": "x-api-key",
+			"value": "436f94bc41d3481c076d1274358089b9"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "95b6e681-440a-4a1f-82b0-314cdf4f6827",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "21e957a1-eb62-4876-9259-bff77b382e30",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
